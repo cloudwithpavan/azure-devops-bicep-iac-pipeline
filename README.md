@@ -181,6 +181,7 @@ This prevents unnecessary pipeline executions.
 
 ---
 
+
 # Screenshots
 
 ## Pipeline Execution
@@ -191,19 +192,20 @@ This prevents unnecessary pipeline executions.
 
 ## Pipeline Stages View
 
-![Pipeline Stages](screenshots/Pipeline stages view.png)
+![Pipeline Stages](screenshots/Pipeline%20stages%20view.png)
 
 ---
 
 ## Azure Resource Deployment
 
-![Azure Resources](screenshots/Azure Resource Group + Storage Account.png)
+![Azure Resources](screenshots/Azure%20Resource%20Group%20+%20Storage%20Account.png)
 
 ---
 
 ## Repository Structure in Azure Repos
 
-![Repo Structure](screenshots/Repo structure in Azure Repos.png)
+![Repo Structure](screenshots/Repo%20structure%20in%20Azure%20Repos.png)
+
 
 ---
 
