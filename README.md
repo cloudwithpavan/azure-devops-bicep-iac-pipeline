@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project demonstrates a **complete Azure DevOps CI/CD pipeline that deploys Infrastructure as Code (IaC) using Bicep**.
+This project demonstrates a **complete CI/CD pipeline using Azure DevOps to deploy Infrastructure as Code (IaC) with Bicep**.
 
 The pipeline automatically validates and deploys Azure infrastructure whenever code changes are pushed to the repository.
 
@@ -11,13 +11,13 @@ Infrastructure deployed in this project:
 * Azure Resource Group
 * Azure Storage Account
 
-The project demonstrates how DevOps practices enable **automated, repeatable, and version-controlled infrastructure deployments**.
+This project shows how DevOps practices enable **automated, repeatable, and version-controlled infrastructure deployments**.
 
 ---
 
 # Architecture
 
-The architecture below shows how the developer, Azure DevOps pipeline, and Azure infrastructure interact.
+The following diagram shows the overall architecture of the system.
 
 ```mermaid
 flowchart LR
@@ -39,7 +39,7 @@ F --> G[Azure Storage Account]
 
 # CI/CD Workflow
 
-The following workflow explains the full pipeline process.
+The workflow below explains the pipeline execution process.
 
 ```mermaid
 flowchart TD
@@ -48,7 +48,7 @@ A[Developer Push Code] --> B[Azure Repos]
 
 B --> C[Pipeline Triggered]
 
-C --> D[Stage 1: Validate Bicep]
+C --> D[Stage 1: Validate Bicep Template]
 
 D --> E[az bicep build]
 
@@ -76,9 +76,9 @@ azure-devops-bicep-iac-pipeline
 │   └── azure-pipelines.yml
 │
 ├── screenshots
+│   ├── Azure Resource Group + Storage Account.png
 │   ├── Pipeline stages view.png
 │   ├── pipeline.png
-│   ├── Azure Resource Group + Storage Account.png
 │   └── Repo structure in Azure Repos.png
 │
 └── README.md
@@ -86,27 +86,23 @@ azure-devops-bicep-iac-pipeline
 
 ---
 
-# Bicep Infrastructure Template
+# Bicep Infrastructure
 
-The Bicep template creates a **Storage Account inside a Resource Group**.
+The Bicep template creates an **Azure Storage Account inside a Resource Group**.
 
-Main template:
+Main template file:
 
 ```
 bicep/main.bicep
 ```
 
-This template defines:
-
-* Storage Account
-* Location
-* SKU configuration
-
-Parameters are provided using:
+Parameter file:
 
 ```
 bicep/parameters.json
 ```
+
+The parameters file contains values used during deployment.
 
 ---
 
@@ -118,41 +114,58 @@ Pipeline configuration file:
 pipelines/azure-pipelines.yml
 ```
 
-The pipeline performs the following tasks.
+The pipeline performs two main stages.
 
-## Stage 1 – Validate Bicep
+---
 
-The Bicep template is validated before deployment.
+## Stage 1 — Validate Bicep
+
+This stage validates the Bicep template.
 
 ```
 az bicep build --file bicep/main.bicep
 ```
 
-This ensures the template compiles correctly.
+This ensures the infrastructure code compiles successfully.
 
 ---
 
-## Stage 2 – Deploy Infrastructure
+## Stage 2 — Deploy Infrastructure
 
-The pipeline then deploys infrastructure using Azure CLI.
+This stage deploys Azure resources.
 
 ```
 az group create
 az deployment group create
 ```
 
-Deployment results in the creation of:
+Deployment results in:
 
-* Resource Group: `bicep-rg`
-* Storage Account: `devopsbicepsa001`
+Resource Group
+
+```
+bicep-rg
+```
+
+Storage Account
+
+```
+devopsbicepsa001
+```
+
+Location
+
+```
+East US
+```
 
 ---
 
-# Pipeline Trigger Rules
+# Pipeline Trigger Configuration
 
-The pipeline automatically runs when code changes are pushed to the `main` branch.
+The pipeline automatically triggers when changes are pushed to the `main` branch.
 
-However, documentation updates do not trigger deployments.
+However, documentation updates should not trigger deployments.
 
 ```
 trigger:
@@ -164,22 +177,7 @@ trigger:
       - README.md
 ```
 
-This prevents unnecessary pipeline runs.
-
----
-
-# Deployment Result
-
-After a successful pipeline execution, the following resources are created in Azure:
-
-Resource Group
-`bicep-rg`
-
-Storage Account
-`devopsbicepsa001`
-
-Region
-`East US`
+This prevents unnecessary pipeline executions.
 
 ---
 
@@ -191,7 +189,7 @@ Region
 
 ---
 
-## Pipeline Stages
+## Pipeline Stages View
 
 ![Pipeline Stages](screenshots/Pipeline stages view.png)
 
@@ -203,9 +201,9 @@ Region
 
 ---
 
-## Repository Structure
+## Repository Structure in Azure Repos
 
-![Repo](screenshots/Repo structure in Azure Repos.png)
+![Repo Structure](screenshots/Repo structure in Azure Repos.png)
 
 ---
 
@@ -221,18 +219,17 @@ Region
 
 ---
 
-# Key DevOps Concepts Demonstrated
+# DevOps Concepts Demonstrated
 
-* Infrastructure as Code
+* Infrastructure as Code (IaC)
 * Automated CI/CD pipelines
+* Cloud infrastructure automation
 * YAML pipeline configuration
-* Cloud resource automation
-* Version-controlled infrastructure
+* Version-controlled deployments
 
 ---
 
 # Author
 
 **Pavan Kumar Gummadi**
-
 DevOps Engineer
